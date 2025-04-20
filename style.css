@@ -1,0 +1,26 @@
+#test {
+    white-space: pre;
+}
+
+canvas {
+    border: 1px solid grey;
+}
+
+.input-form {
+    margin: 20px 0;
+}
+
+body {
+    width: 700px;
+    margin: 30px auto 90px;
+}
+
+.thm {
+    border: 1px solid grey;
+    padding: 5px 10px;
+}
+
+img{
+    display: block;
+  margin: auto;
+}

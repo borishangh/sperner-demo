@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Sperner's Lemma Demo</h1>
+    <div class="input-form">
+        <label for="side">Side :</label>
+        <input type="range" min="2" max="10" step="1" value="10" />
+        <input type="button" value="Reset Triangle" onclick="reset()" />
+        <p>Purple lines indicate red-blue edges (Click on a vertex to change colour)</p>
+    </div>
+
+    <canvas id="canvas" width="620" height="540"></canvas>
+
+    <p class="thm">
+        <b>1D case : </b> If a discrete function takes only the values 0 and 1, begins at the value 0 and ends at the
+        value 1, then it must switch values an odd number of times. <a
+            href="https://en.wikipedia.org/wiki/Sperner%27s_lemma">(wikipedia)</a>
+    </p>
+
+    <p>
+        A triangulation is an assignment where :
+    <ol>
+        <li>The vertices each have distinct colouring. Shown here in red (top), blue (bottom left) and green (bottom
+            right)</li>
+        <li>Each side can take only the 2 colours of thier respective sides.</li>
+    </ol>
+    </p>
+    <p class="thm">
+        By Sperner's Lemma, given any triangulation, there is always a smaller triangle with all three colours at its
+        vertices (a rainbow triangle). Moreover, the number of such triangles is always odd.
+    </p>
+
+    <h2>Proof Stetch</h2>
+
+    <p>
+        Connecting the cells across the red-blue edges produces only simple paths and cycles. Paths that end within the
+        triangulation correspond to a rainbow triangle (shaded yellow). <br> From the 1D case it follows that <b>only an
+            odd number of paths enter the triangle</b> (from the top left side of the
+        triangulation).
+    </p>
+    <img src="img/img1.webp" width="300">
+    <p>Only an even number of paths may enter and leave the triangulation from the red-blue side. <b>Number of paths
+            entering and terminating within the triangle is still odd </b>(odd - even = odd).</p>
+
+    <img src="img/img2.webp" width="300">
+
+    <p>Paths may terminate within the triangulation but as they do not exit the triangulation, both the starting and
+        ending nodes contribute to a rainbow triangle. <b>Thus, such paths contribute an even number of rainbow
+            triangles.</b></p>
+
+    <p>From the above 2 cases, we can conclude that the final number of RT's is <b>odd + even = odd.</b> Existence can
+        be shown by induction from the n=2 case.</p>
+
+        <img src="img/img3.webp" width="500">
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
