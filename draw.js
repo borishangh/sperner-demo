@@ -1,10 +1,10 @@
 export function drawTriangle(ctx, triangle, h, dpr) {
     const n = triangle.n;
-ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-ctx.fillStyle="black"
+    ctx.fillStyle = "black"
     ctx.font = "40px Arial";
-    ctx.fillText(`n = ${n}`,10,45);
+    ctx.fillText(`n = ${n}`, 10, 45);
 
     highlightTrichromatic(ctx, triangle, h, dpr);
     redBlueEdges(ctx, triangle, h, dpr);
@@ -107,10 +107,19 @@ export function highlightTrichromatic(ctx, triangle, h, dpr) {
 }
 
 function redBlueEdges(ctx, t, h, dpr) {
+
+    const a1 = canvas_xy(0, 0, h, dpr)
+    const a2 = canvas_xy(0, 1, h, dpr)
+    const a3 = canvas_xy(1, 0, h, dpr)
+
+    const dx = (a1.x + a2.x + a3.x) / 3 - a1.x //37.5
+    const dy = (a1.y + a2.y + a3.y) / 3 - a1.y //-21.65
+
+
     const edges = [
-        { check: (y, x) => [t.get(y, x), t.get(y + 1, x)], deltas: [-37.5, -21.65] },
-        { check: (y, x) => [t.get(y, x + 1), t.get(y + 1, x)], deltas: [37.5, -21.65] },
-        { check: (y, x) => [t.get(y, x), t.get(y, x + 1)], deltas: [0, 43.3] }
+        { check: (y, x) => [t.get(y, x), t.get(y + 1, x)], deltas: [-dx, dy] },
+        { check: (y, x) => [t.get(y, x + 1), t.get(y + 1, x)], deltas: [dx, dy] },
+        { check: (y, x) => [t.get(y, x), t.get(y, x + 1)], deltas: [0, -2 * dy] }
     ];
 
     ctx.strokeStyle = "purple";
@@ -123,8 +132,8 @@ function redBlueEdges(ctx, t, h, dpr) {
                 const [a, b] = check(y, x);
                 if ((a === 0 && b === 1) || (a === 1 && b === 0)) {
                     ctx.beginPath();
-                    ctx.moveTo(cx + 37.5, cy - 21.65);
-                    ctx.lineTo(cx + 37.5 + deltas[0], cy - 21.65 + deltas[1]);
+                    ctx.moveTo(cx + dx, cy + dy);
+                    ctx.lineTo(cx + dx + deltas[0], cy + dy + deltas[1]);
                     ctx.stroke();
                 }
             });
